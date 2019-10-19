@@ -1,32 +1,28 @@
 using System;
+using ParcelCostCalculator.Models;
 
 namespace ParcelCostCalculator
 {
     public class Parcel
     {
-        private decimal Dimensions;
+        private ParcelSize _parcelSize;
 
-        public Parcel(decimal dimensions)
+        public Parcel(ParcelSize parcelSize)
         {
-            if (dimensions < 0)
-            {
-                throw new ArgumentException("Dimensions must be a positive number");
-            }
-
-            Dimensions = dimensions;
+            _parcelSize = parcelSize;
         }
 
         public decimal CalculateShippingCost()
         {
-            if (Dimensions < 10)
+            if (_parcelSize == ParcelSize.SMALL)
             {
                 return 3m;
             }
-            if (Dimensions < 50)
+            if (_parcelSize == ParcelSize.MEDIUM)
             {
                 return 8m;
             }
-            if (Dimensions < 100)
+            if (_parcelSize == ParcelSize.LARGE)
             {
                 return 15m;
             }
