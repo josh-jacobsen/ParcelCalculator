@@ -33,9 +33,9 @@ namespace ParcelCostCalculator.Tests
         public void AddParcelToOrder_ValidParcels_AddsParcels()
         {
             // Arrange 
+            var order = new Order();
             var smallParcel = new Parcel(1);
             var mediumParcel = new Parcel(10);
-            var order = new Order();
 
             // Act
             order.AddParcelToOrder(smallParcel);
@@ -49,9 +49,9 @@ namespace ParcelCostCalculator.Tests
         public void GetShippingPriceForOrder_ValidParcelsInOrder_Calculates()
         {
             // Arrange 
+            var order = new Order();
             var smallParcel = new Parcel(1);
             var mediumParcel = new Parcel(10);
-            var order = new Order();
 
             // Act
             order.AddParcelToOrder(smallParcel);
@@ -71,6 +71,24 @@ namespace ParcelCostCalculator.Tests
 
             // Assert
             Assert.Equal(0, order.GetShippingPriceForOrder());
+        }
+
+        [Fact]
+        public void ShippingType_SpeedyShipping_DoublesShippingCost()
+        {
+            // Arrange 
+            var order = new Order();
+            var smallParcel = new Parcel(1);
+            var mediumParcel = new Parcel(10);
+
+            order.AddParcelToOrder(smallParcel);
+            order.AddParcelToOrder(mediumParcel);
+
+            // Act
+            order.SetShippingTypeToSpeedy();
+
+            // Assert
+            Assert.Equal(22, order.GetShippingPriceForOrder());
         }
     }
 }
