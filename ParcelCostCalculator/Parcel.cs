@@ -4,7 +4,7 @@ namespace ParcelCostCalculator
 {
     public class Parcel
     {
-        public decimal Dimensions;
+        private decimal Dimensions;
 
         public Parcel(decimal dimensions)
         {
