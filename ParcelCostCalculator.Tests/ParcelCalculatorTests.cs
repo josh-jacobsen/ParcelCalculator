@@ -84,5 +84,24 @@ namespace ParcelCostCalculator.Tests
             // Assert
             Assert.Equal(22, order.GetShippingPriceForOrder());
         }
+
+        [Fact]
+        public void ToString_WithParcels_Outputs()
+        {
+            // Arrange 
+            var order = new Order();
+            var smallParcel = new Parcel(ParcelSize.SMALL);
+            var mediumParcel = new Parcel(ParcelSize.MEDIUM);
+
+            order.AddParcelToOrder(smallParcel);
+            order.AddParcelToOrder(mediumParcel);
+
+            // Act
+            var output = order.ToString();
+
+            // Assert
+            Console.WriteLine("");
+
+        }
     }
 }

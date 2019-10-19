@@ -5,24 +5,24 @@ namespace ParcelCostCalculator
 {
     public class Parcel
     {
-        private ParcelSize _parcelSize;
+        public ParcelSize Size { get; private set; }
 
         public Parcel(ParcelSize parcelSize)
         {
-            _parcelSize = parcelSize;
+            Size = parcelSize;
         }
 
         public decimal CalculateShippingCost()
         {
-            if (_parcelSize == ParcelSize.SMALL)
+            if (Size == ParcelSize.SMALL)
             {
                 return 3m;
             }
-            if (_parcelSize == ParcelSize.MEDIUM)
+            if (Size == ParcelSize.MEDIUM)
             {
                 return 8m;
             }
-            if (_parcelSize == ParcelSize.LARGE)
+            if (Size == ParcelSize.LARGE)
             {
                 return 15m;
             }
