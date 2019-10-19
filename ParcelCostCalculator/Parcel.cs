@@ -7,9 +7,18 @@ namespace ParcelCostCalculator
     {
         public ParcelSize Size { get; private set; }
 
-        public Parcel(ParcelSize parcelSize)
+        public decimal Weight { get; set; }
+
+        public Parcel(ParcelSize parcelSize, decimal weight)
         {
+            // TODO: use Factory Patten to avoid throwing exceptions in the constructor
+            if (weight < 0)
+            {
+                throw new ArgumentException("Parcel weight must be a positive number");
+            }
+
             Size = parcelSize;
+            Weight = weight;
         }
 
         public decimal CalculateShippingCost()
@@ -28,6 +37,33 @@ namespace ParcelCostCalculator
             }
 
             return 25m;
+        }
+
+        public decimal CalculateAdditionalChargesForWeight()
+        {
+            decimal extraCharge = 0;
+
+            if (Size == ParcelSize.SMALL && Weight > 1)
+            {
+                extraCharge = (Weight - 1) * 2;
+            }
+
+            if (Size == ParcelSize.MEDIUM && Weight > 3)
+            {
+                extraCharge = (Weight - 3) * 2;
+            }
+
+            if (Size == ParcelSize.LARGE && Weight > 6)
+            {
+                extraCharge = (Weight - 6) * 2;
+            }
+
+            if (Size == ParcelSize.XL && Weight > 10)
+            {
+                extraCharge = (Weight - 10) * 2;
+            }
+
+            return extraCharge;
         }
     }
 }
