@@ -40,7 +40,7 @@ namespace ParcelCostCalculator.Tests
         }
 
         [Fact]
-        public void GetShippingPriceForOrder_ValidParcelsInOrder_Calculates()
+        public void GetTotalShippingPriceForOrder_NormalShipping_ReturnsBasePrice()
         {
             // Arrange 
             var order = new Order();
@@ -52,11 +52,11 @@ namespace ParcelCostCalculator.Tests
             order.AddParcelToOrder(mediumParcel);
 
             // Assert
-            Assert.Equal(11, order.GetShippingPriceForOrder());
+            Assert.Equal(11, order.GetTotalShippingPriceForOrder());
         }
 
         [Fact]
-        public void GetShippingPriceForOrder_NoParcelsInOrder_Returns0()
+        public void GetTotalShippingPriceForOrder_NoParcelsInOrder_Returns0()
         {
             // Arrange 
             var order = new Order();
@@ -64,11 +64,11 @@ namespace ParcelCostCalculator.Tests
             // Act
 
             // Assert
-            Assert.Equal(0, order.GetShippingPriceForOrder());
+            Assert.Equal(0, order.GetTotalShippingPriceForOrder());
         }
 
         [Fact]
-        public void ShippingType_SpeedyShipping_DoublesShippingCost()
+        public void GetTotalShippingPriceForOrder_SpeedyShipping_DoublesShippingCost()
         {
             // Arrange 
             var order = new Order();
@@ -82,7 +82,28 @@ namespace ParcelCostCalculator.Tests
             order.SetShippingTypeToSpeedy();
 
             // Assert
-            Assert.Equal(22, order.GetShippingPriceForOrder());
+            Assert.Equal(22, order.GetTotalShippingPriceForOrder());
+        }
+
+        [Fact]
+        public void ToString_WithParcels_OutputsAllFields()
+        {
+            // Arrange 
+            var order = new Order();
+            var smallParcel = new Parcel(ParcelSize.SMALL);
+            var mediumParcel = new Parcel(ParcelSize.MEDIUM);
+
+            order.AddParcelToOrder(smallParcel);
+            order.AddParcelToOrder(mediumParcel);
+
+            order.SetShippingTypeToSpeedy();
+
+            // Act
+            var output = order.ToString();
+
+            // Assert
+            Console.WriteLine("");
+
         }
     }
 }
