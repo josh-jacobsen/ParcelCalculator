@@ -11,12 +11,6 @@ namespace ParcelCostCalculator
 
         public Parcel(ParcelSize parcelSize, decimal weight)
         {
-            // TODO: use Factory Patten to avoid throwing exceptions in the constructor
-            if (weight < 0)
-            {
-                throw new ArgumentException("Parcel weight must be a positive number");
-            }
-
             Size = parcelSize;
             Weight = weight;
         }

@@ -50,18 +50,6 @@ namespace ParcelCostCalculator.Tests
         }
 
         [Fact]
-        public void ParcelConstructor_NegativeWeight_ThrowsException()
-        {
-            // Arrange 
-
-            // Act
-            var ex = Assert.Throws<ArgumentException>(() => new Parcel(ParcelSize.SMALL, -1));
-
-            // Assert
-            Assert.Equal("Parcel weight must be a positive number", ex.Message);
-        }
-
-        [Fact]
         public void AddParcelToOrder_ValidParcels_AddsParcels()
         {
             // Arrange 
@@ -140,8 +128,7 @@ namespace ParcelCostCalculator.Tests
             var output = order.ToString();
 
             // Assert
-            Console.WriteLine("");
-
+            Assert.Equal("Parcel 1 is SMALL and will cost $3.00 to send \nParcel 2 is MEDIUM and will cost $8.00 to send \nThe base cost for the order is $11.00 \nYou have chosen speedy shiping, so the total price of your order is $22.00 \n", output);
         }
     }
 }
